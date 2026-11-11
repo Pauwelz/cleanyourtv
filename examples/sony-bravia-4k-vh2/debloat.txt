@@ -174,6 +174,36 @@
 # adapter can uncomment them, and one where they are off gets Ethernet back with
 # `pm enable com.sony.dtv.sonybugreportsys` and the same for idd.agent, one package per call.
 
+# Eighth unit, EU firmware again: XR-55X90J, build BRAVIA_VH2_EU-user 12 STT2.230505.001.S136 682241 (the first
+# unit's build), ro.adb.secure=1, on the built-in Ethernet port with Wi-Fi not used. Applied on 11 November 2026
+# in seven batches with a screenshot between them, then this repo's launcher; three restarts and one evening so
+# far, not yet lived with for days. What this unit adds:
+#
+#  - Already disabled before the list ran (factory or an earlier choice, not established): promos, seeds.iot,
+#    b2b.vendorprotocol, b2b.softap, sonytab, livingfit, smarthelp, homekit, calibrationmonitor, smartmediaapp,
+#    sonypicturescore, youtube.tvmusic, the my5/itv/ard/all4/iplayer/sounds launchers, com.youview.poa and
+#    de.hdplus.tvapp.androidtv.
+#  - Disabled from the list: the tracker, telemetry, demo and preloaded groups, sonyselect,
+#    seeds.iot.remotestart, autoinstalls, lastaccess, usercontext, vewd, helpguidecontents, osat.music,
+#    google.android.videos, and from the commented groups hotelmode, rs232csupport, accessibility.tutorial,
+#    gestureapp, the three DLNA packages and ecodashboard. disable.sh did not skip com.qterics.da.product or
+#    android.autoinstalls.config.sony.bravia here, as it did on the sixth unit.
+#  - com.sonyericsson.idd.agent and com.sony.dtv.sonybugreportsys were disabled too. This set uses the built-in
+#    Ethernet port, not a USB adapter (#3608), and Ethernet was up after each of the three restarts.
+#  - launcherx registers HOME at priority=2 on this EU build as well, with setupwraith at priority=1. setupwraith
+#    was disabled from the list, then build-and-install.sh disabled launcherx, and launcherxcustomizer went with
+#    it. Leaving launcherx enabled, as the first unit did, was not tried.
+#  - With launcherx and setupwraith off and no key helper, the real remote's Home, Input, gear and app buttons
+#    all worked. The Help button says its app is disabled (com.sony.dtv.customersupport). This remote has no
+#    Apps button.
+#  - Chromecast built-in kept: casting from a desktop Chromium worked with setupwraith and the Assistant off.
+#    Firmware updates kept. com.sony.dtv.timers kept: it holds the sleep timer of the quick settings menu.
+#  - Off by the owner's choice and not in the groups above: AirPlay, the HbbTV player, the Assistant packages
+#    and the Apple TV app (the commented "eighth unit" group at the end).
+#  - A key helper costs the volume ramp here too. With HomeKeyService bound for one app_keys entry (scan 377,
+#    the remote's TV button, which then opened the mapped app instead of TVX), holding Volume Up moved one step.
+#    consume_volume_keys did not bring the ramp back; volume_pauses_filter did. Sound goes to a soundbar.
+
 # ACR viewing tracker
 tv.samba.ssm                                   # Samba TV fingerprints what's on screen
 tv.samba.ssm.ui
@@ -234,6 +264,15 @@ com.google.android.videos                      # Google TV Movies & TV
 # com.sony.huey.dlna.module
 # com.sony.huey.dlna.renderersettings
 # com.sony.dtv.ecodashboard                    # Eco dashboard; seventh unit only, lived with six days
+
+# Eighth unit (XR-55X90J, EU): off by the owner's choice there, one evening so far. Uncomment the ones you
+# don't use. The first unit keeps the Assistant packages, and its Apple TV app is factory-disabled.
+# com.sony.dtv.airplayapp                      # AirPlay
+# com.sony.dtv.hbbtvplayer                     # HbbTV red-button player for broadcast channels
+# com.google.android.katniss                   # Google Assistant; the remote's mic button stops working
+# com.sony.dtv.voicesearch
+# com.sony.dtv.assistantadapter
+# com.apple.atve.sony.appletv                  # Apple TV app
 
 # Google TV setup wizard: claims HOME and takes over once the stock launcher is disabled
 # On the A80L (VH22) with it off, com.sony.dtv.sonysystemservice asks for its provider every 500 ms and logcat
