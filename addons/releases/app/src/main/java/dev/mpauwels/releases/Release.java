@@ -23,8 +23,10 @@ final class Release {
     final int mediaId;
     /** TMDB id of a film, TVDB id of a series; 0 when the server gave none. */
     final int externalId;
+    /** The id of the episode on its server, for an episode on the calendar: the queue names its downloads by it. 0 otherwise. */
+    final int episodeId;
 
-    Release(LocalDate day, long atMs, String title, String detail, boolean hasFile, boolean monitored, String quality, boolean film, int mediaId, int externalId) {
+    Release(LocalDate day, long atMs, String title, String detail, boolean hasFile, boolean monitored, String quality, boolean film, int mediaId, int externalId, int episodeId) {
         this.day = day;
         this.atMs = atMs;
         this.title = title;
@@ -35,6 +37,7 @@ final class Release {
         this.film = film;
         this.mediaId = mediaId;
         this.externalId = externalId;
+        this.episodeId = episodeId;
     }
 
     /**

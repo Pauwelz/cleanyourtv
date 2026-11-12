@@ -6,11 +6,17 @@ on the TV. For the [Clean Your TV](../../README.md) launcher it declares a [modu
 
 | Column | Shows |
 |---|---|
-| Today | The films, then the episodes by air time, each with its poster and "Downloaded", "Missing", "Not aired yet" or "Not monitored". |
+| Recently added | The last imports, newest first, one card per import: a film, an episode ("3x05") or a season pack ("Season 1"). |
+| Today | The films, then the episodes by air time, each with its poster and "Downloaded", "Downloading", "Blocked", "Missing", "Not aired yet" or "Not monitored". Today is the lit panel in the middle. |
 | Coming up | The next 7 days as an agenda. Days without a release are left out. |
-| Recently added | The last imports, newest first: one line per film, one per series ("3x05" or "4 episodes"). |
 
-The top right corner shows how many downloads are in the queue, and the titles whose import is blocked.
+A title or a detail that does not fit in its row scrolls while that row has the focus.
+
+At the foot of Today is the Downloads link, with how many downloads are in the queue and how many imports are
+blocked. OK on it opens Downloads: every download with its progress, size, time left and client, soonest first, and
+each blocked import with the reason that Sonarr or Radarr gives. A season pack is one download.
+Back returns. The queue is read again once a minute while the screen shows: the servers ask their download clients
+about that often.
 
 - "Today" is the day on the TV's clock. An episode counts by its air time in the TV's time zone.
 - A film counts when one of its release dates is on that day.
@@ -54,7 +60,8 @@ Press Home: the launcher asks once whether to show the card.
 
 No account, no telemetry, no ads, no background service. Each time its screen opens, the app asks each server
 for the calendar, the import history and the queue (6 requests), and for the poster of each title it has not
-seen before. Posters come from the servers' own picture store and stay in the app's cache folder. The API keys
+seen before. While the screen shows, it asks for the queue again once a minute (2 requests), and it stops when the
+screen goes away. Posters come from the servers' own picture store and stay in the app's cache folder. The API keys
 stay in the app's own storage, which is not backed up. The door that `setup.sh` uses needs
 `WRITE_SECURE_SETTINGS`, which only the ADB shell has.
 
