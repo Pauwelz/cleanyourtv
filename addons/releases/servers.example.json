@@ -1,0 +1,4 @@
+{
+  "sonarr": {"url": "http://192.168.1.50:8989", "key": "the API key from Settings > General", "unmonitored": false},
+  "radarr": {"url": "http://192.168.1.50:7878", "key": "the API key from Settings > General", "unmonitored": false, "types": "digitalRelease"}
+}

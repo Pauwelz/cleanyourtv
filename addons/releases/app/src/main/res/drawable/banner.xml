@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 16:9 banner: a calendar page with a play mark, and three list lines beside it. Own art. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp" android:height="180dp"
+    android:viewportWidth="320" android:viewportHeight="180">
+    <path android:fillColor="#101418" android:pathData="M0,0h320v180h-320z" />
+    <path android:fillColor="#F2B544" android:pathData="M60,48h88v20h-88z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M60,68h88v68h-88z" />
+    <path android:fillColor="#101418" android:pathData="M94,84l30,18l-30,18z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M176,66h84v10h-84zM176,96h64v10h-64zM176,126h74v10h-74z" />
+</vector>
