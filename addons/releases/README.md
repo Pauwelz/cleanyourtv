@@ -21,10 +21,6 @@ about that often.
 - "Today" is the day on the TV's clock. An episode counts by its air time in the TV's time zone.
 - A film counts when one of its release dates is on that day.
 - A server that does not answer shows as an error line, never as an empty column.
-- OK on a downloaded title plays it in [Plezy](https://github.com/edde746/plezy), with a `plezy://play` link by
-  TVDB or TMDB id. A link names a film or a series, never one episode: for a series Plezy plays the next episode
-  to watch, which is not always the episode on the row. Without Plezy on the TV, the line under the title says so.
-  Tested with Plezy 2.25.0. Plezy has no link that opens the page of a series.
 
 ## Set it up
 
@@ -51,6 +47,18 @@ TV_HOST=<tv ip> addons/releases/setup.sh
 ```
 
 Press Home: the launcher asks once whether to show the card.
+
+## Playing a title
+
+OK on a title does nothing: Releases shows what there is, and you play it in your own player. A link to a player
+was tried and left out. The findings, for whoever wants to add one:
+
+| Player | Result |
+|---|---|
+| [Plezy](https://github.com/edde746/plezy) 2.25.0 | Tested, works: `plezy://play?type=movie&tmdb=<id>` and `type=show&tvdb=<id>` play a title by the ids that Radarr and Sonarr give. Left out because few people use Plezy. |
+| Plex for Android TV 2026.22.0 | Tested, does not work: the app accepts a `plex://` link, comes to the front and stays on its home screen. Tried `plex://server://<server id>/com.plexapp.plugins.library/library/metadata/<item>`, `plex://play/` and `plex://preplay/` with `metadataKey` and `server`, with and without the `START_PLAYBACK` extra. A link would also need a Plex token, to find the item by its TMDB or TVDB id. |
+| Jellyfin for Android TV 0.20.0 | Not tested, no server at hand. The app declares no link for a title, only its start and a search. |
+| Emby for Android TV 2.5.05g | Not tested, no server at hand. The app declares `embyatv://tv.emby.embyatv/play` and `/displayitem` links; how they name an item is not declared. |
 
 ## Permissions
 

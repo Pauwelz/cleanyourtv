@@ -1,10 +1,7 @@
 package dev.mpauwels.releases;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -38,7 +35,7 @@ import java.util.concurrent.Executors;
 /**
  * The tile and module card open this: what was added last, what Sonarr and Radarr release today, and what comes
  * in the next days, as past, present and future. Today is the lit panel, with a link to the queue at its foot.
- * OK on a downloaded title plays it in Plezy; OK on the link opens the Downloads view, and Back closes it. It
+ * OK on the link opens the Downloads view, and Back closes it. A title has no action of its own. It
  * reads the servers each time this screen opens, then the queue once a minute while the screen shows, and never
  * in the background.
  */
@@ -48,7 +45,6 @@ public class MainActivity extends Activity {
     /** Sonarr and Radarr ask their download clients about once a minute, so a faster read shows the same numbers. */
     private static final long REFRESH_MS = 60_000;
     private static final String QUEUE = "queue";
-    private static final String PLAYER = "com.edde746.plezy";
 
     private interface Sink {
         void take(String body) throws JSONException;
@@ -416,8 +412,6 @@ public class MainActivity extends Activity {
 
     private void add(Column column, Row row, Release r, Config config, int mine) {
         column.rows.addView(row, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        String link = r.hasFile ? r.playLink() : null;
-        if (link != null) row.setOnClickListener(v -> play(link));
         if (row.poster != null) poster(row, r.film ? config.radarr : config.sonarr, r.film, r.mediaId, mine);
     }
 
@@ -435,14 +429,6 @@ public class MainActivity extends Activity {
                 if (mine == run) row.poster.setImageBitmap(bitmap);
             });
         });
-    }
-
-    private void play(String link) {
-        try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)).setPackage(PLAYER));
-        } catch (ActivityNotFoundException e) {
-            today.count.setText("Plezy is not on this TV");
-        }
     }
 
     /** The line in an empty Today column, with the next release when there is one. */

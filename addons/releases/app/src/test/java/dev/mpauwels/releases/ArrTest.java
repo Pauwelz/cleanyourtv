@@ -39,7 +39,6 @@ public class ArrTest {
         assertFalse(r.film);
         assertEquals(7, r.mediaId);
         assertEquals(Instant.parse("2026-11-12T03:00:00Z").toEpochMilli(), r.atMs);
-        assertEquals("plezy://play?type=show&tvdb=4242", r.playLink());
         // The same answer in a zone west of UTC: 03:00Z is the evening of the 11th there, 23:30Z is the 12th.
         List<Release> denver = Arr.episodes(EPISODES, ZoneId.of("America/Denver"), DAY, DAY);
         assertEquals(1, denver.size());
@@ -63,9 +62,7 @@ public class ArrTest {
         assertEquals("Digital release", all.get(0).detail);
         assertEquals(Release.NO_TIME, all.get(0).atMs);
         assertTrue(all.get(0).film);
-        assertEquals("plezy://play?type=movie&tmdb=603", all.get(0).playLink());
         assertEquals("In cinemas", all.get(1).detail);
-        assertNull("no id, no link", all.get(1).playLink());
         assertTrue(all.get(0).monitored);
         assertFalse(all.get(1).monitored);
         List<Release> digital = Arr.films(json, "digitalRelease", DAY, DAY);
@@ -97,7 +94,6 @@ public class ArrTest {
         assertEquals("2x08, Part 8", out.get(3).detail);
         assertEquals("2x13, Part 13", out.get(4).detail);
         assertEquals("WEBDL-1080p", out.get(0).quality);
-        assertEquals("plezy://play?type=show&tvdb=4001", out.get(0).playLink());
 
         String pack = "{\"records\":[{\"date\":\"2026-11-12T14:45:04Z\",\"seriesId\":5,\"episodeId\":91,\"downloadId\":\"P\",\"series\":{\"title\":\"Side Quest\"},\"episode\":{\"seasonNumber\":1,\"episodeNumber\":2}},"
                 + "{\"date\":\"2026-11-12T14:45:03Z\",\"seriesId\":5,\"episodeId\":90,\"downloadId\":\"P\",\"series\":{\"title\":\"Side Quest\"},\"episode\":{\"seasonNumber\":1,\"episodeNumber\":1}}]}";

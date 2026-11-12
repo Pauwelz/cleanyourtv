@@ -21,12 +21,10 @@ final class Release {
     final boolean film;
     /** The id of the film or the series on its server: the poster is asked by it. */
     final int mediaId;
-    /** TMDB id of a film, TVDB id of a series; 0 when the server gave none. */
-    final int externalId;
     /** The id of the episode on its server, for an episode on the calendar: the queue names its downloads by it. 0 otherwise. */
     final int episodeId;
 
-    Release(LocalDate day, long atMs, String title, String detail, boolean hasFile, boolean monitored, String quality, boolean film, int mediaId, int externalId, int episodeId) {
+    Release(LocalDate day, long atMs, String title, String detail, boolean hasFile, boolean monitored, String quality, boolean film, int mediaId, int episodeId) {
         this.day = day;
         this.atMs = atMs;
         this.title = title;
@@ -36,15 +34,6 @@ final class Release {
         this.quality = quality;
         this.film = film;
         this.mediaId = mediaId;
-        this.externalId = externalId;
         this.episodeId = episodeId;
-    }
-
-    /**
-     * The link that plays this title in Plezy ("plezy:// links" in the README of github.com/edde746/plezy), or
-     * null without an id. For a series Plezy plays the next episode to watch.
-     */
-    String playLink() {
-        return externalId <= 0 ? null : "plezy://play?type=" + (film ? "movie&tmdb=" : "show&tvdb=") + externalId;
     }
 }

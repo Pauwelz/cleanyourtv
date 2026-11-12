@@ -70,7 +70,7 @@ final class Arr {
             if (day.isBefore(from) || day.isAfter(to)) continue;
             JSONObject series = o.optJSONObject("series");
             out.add(new Release(day, at.toEpochMilli(), series == null ? "" : text(series, "title"), episode(o),
-                    o.optBoolean("hasFile"), o.optBoolean("monitored", true), "", false, o.optInt("seriesId"), series == null ? 0 : series.optInt("tvdbId"), o.optInt("id")));
+                    o.optBoolean("hasFile"), o.optBoolean("monitored", true), "", false, o.optInt("seriesId"), o.optInt("id")));
         }
         return out;
     }
@@ -89,7 +89,7 @@ final class Arr {
                 LocalDate day = datePart(text(o, date[0]));
                 if (day == null || day.isBefore(from) || day.isAfter(to)) continue;
                 out.add(new Release(day, Release.NO_TIME, text(o, "title"), date[1], o.optBoolean("hasFile"), o.optBoolean("monitored", true), "", true,
-                        o.optInt("id"), o.optInt("tmdbId"), 0));
+                        o.optInt("id"), 0));
                 break;
             }
         }
@@ -129,7 +129,7 @@ final class Arr {
             JSONObject named = quality == null ? null : quality.optJSONObject("quality");
             out.add(new Release(at.atZone(zone).toLocalDate(), at.toEpochMilli(), text(media, "title"),
                     film ? "Film" : pack && episode != null ? "Season " + episode.optInt("seasonNumber") : episode(episode), true, true,
-                    named == null ? "" : text(named, "name"), film, r.optInt(film ? "movieId" : "seriesId"), media.optInt(film ? "tmdbId" : "tvdbId"), 0));
+                    named == null ? "" : text(named, "name"), film, r.optInt(film ? "movieId" : "seriesId"), 0));
         }
         return out;
     }
