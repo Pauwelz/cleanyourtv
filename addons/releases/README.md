@@ -10,6 +10,8 @@ on the TV. For the [Clean Your TV](../../README.md) launcher it declares a [modu
 | Today | The films, then the episodes by air time, each with its poster and "Downloaded", "Downloading", "Blocked", "Missing", "Not aired yet" or "Not monitored". Today is the lit panel in the middle. |
 | Coming up | The next 7 days as an agenda. Days without a release are left out. |
 
+<img src="screenshot-downloads.jpg" width="640" alt="The Downloads view of Releases on a TV">
+
 A title or a detail that does not fit in its row scrolls while that row has the focus.
 
 At the foot of Today is the Downloads link, with how many downloads are in the queue and how many imports are
